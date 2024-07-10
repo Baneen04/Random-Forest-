@@ -1,0 +1,44 @@
+**Import Libraries**
+
+import pandas as pd
+from sklearn.datasets import load_iris
+%matplotlib inline
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import confusion_matrix
+%matplotlib inline
+import matplotlib.pyplot as plt
+import seaborn as sn
+
+**Load the Dataset**
+
+iris = load_iris()
+
+iris
+
+**DataFrame**
+
+df = pd.DataFrame(iris.data)
+df.head()
+
+df['target'] = iris.target
+
+**Train and the model and prediction**
+
+X = df.drop('target',axis='columns')
+y = df.target
+
+**Train_Test_Split**
+
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2,random_state=0)
+
+** Import Model and Trainning**
+
+model = RandomForestClassifier(n_estimators=25)
+model.fit(X_train, y_train)
+
+model.score(X_test, y_test)
+
+y_predicted = model.predict(X_test)
+y_predicted
